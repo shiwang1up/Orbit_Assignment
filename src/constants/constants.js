@@ -7,19 +7,9 @@ export const ICON_NAMES = {
 
 export const IMAGE_SOURCES = {
   SPLASH_LOGO: require('../../assets/splashscreen/splashLogo.png'),
-//   LOGO: require('../assets/images/logo.png'),
-//   BACKGROUND: require('../assets/images/background.png'),
+  //   LOGO: require('../assets/images/logo.png'),
+  //   BACKGROUND: require('../assets/images/background.png'),
 };
-
-
-
-
-
-
-
-
-
-
 
 // export const ICON_TYPES = {
 //   MATERIAL_COMMUNITY_ICONS: 'MaterialCommunityIcons',
@@ -44,4 +34,18 @@ export const ICON_IMPORTS = {
 //       color="#4F8EF7"
 //     />
 //   );
+// };
+
+
+
+
+
+
+
+
+
+
+// export const COMPONENTS = {
+//   HOME: require('../views/Home'),
+//   // Add more icon imports as needed
 // };
