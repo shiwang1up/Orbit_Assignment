@@ -7,6 +7,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import Home from '../views/Home';
 import {AppNavigatorStyles} from '../styles/globalStyles';
+import Search from '../views/Search';
+import {ICON_COLORS, ICON_SIZES, ICON_NAMES} from '../constants/constants';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -33,32 +35,34 @@ export default function AppNavigator() {
           let iconSize;
 
           if (route.name === 'Home') {
-            iconName = 'home-outline';
+            iconName = `${ICON_NAMES.HOME}`;
             IconComponent = Ionicons;
-            iconSize = 26;
+            iconSize = ICON_SIZES.SMALL;
           } else if (route.name === 'Discover') {
-            iconName = 'search1';
+            iconName = `${ICON_NAMES.DISCOVER}`;
             IconComponent = AntDesign;
-            iconSize = 28;
+            iconSize = ICON_SIZES.MEDIUM;
           } else if (route.name === 'Create') {
-            iconName = 'pluscircleo';
+            iconName = `${ICON_NAMES.CREATE}`;
             IconComponent = AntDesign;
-            iconSize = 26;
+            iconSize = ICON_SIZES.SMALL;
           } else if (route.name === 'Community') {
-            iconName = 'people-outline';
+            iconName = `${ICON_NAMES.COMMUNITY}`;
             IconComponent = Ionicons;
-            iconSize = 28;
+            iconSize = ICON_SIZES.MEDIUM;
           } else if (route.name === 'Me') {
-            iconName = 'account-circle-outline';
+            iconName = `${ICON_NAMES.ME}`;
             IconComponent = MaterialCommunityIcons;
-            iconSize = 29;
+            iconSize = ICON_SIZES.LARGE;
           }
 
           return (
             <IconComponent
               name={iconName}
               size={iconSize}
-              color={focused ? '#000' : '#C0C0C0'}
+              color={
+                focused ? `${ICON_COLORS.PRIMARY}` : `${ICON_COLORS.SECONDARY}`
+              }
             />
           );
         },
@@ -67,7 +71,7 @@ export default function AppNavigator() {
         tabBarInactiveTintColor: '#C0C0C0',
       })}>
       <Tab.Screen name="Home" component={HomeStack} />
-      <Tab.Screen name="Discover" component={Home} />
+      <Tab.Screen name="Discover" component={Search} />
       <Tab.Screen name="Create" component={Home} />
       <Tab.Screen name="Community" component={Home} />
       <Tab.Screen name="Me" component={Home} />

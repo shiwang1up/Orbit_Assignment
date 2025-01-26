@@ -5,7 +5,7 @@ import {IMAGE_SOURCES} from '../constants/constants';
 import {globalStyles} from '../styles/globalStyles';
 import typography from '../styles/typography';
 
-const SplashScreen = () => {
+export default function SplashScreen() {
   const splashLogo = IMAGE_SOURCES.SPLASH_LOGO;
 
   return (
@@ -32,7 +32,7 @@ const SplashScreen = () => {
       </View>
     </LinearGradient>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -59,5 +59,3 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
-
-export default SplashScreen;

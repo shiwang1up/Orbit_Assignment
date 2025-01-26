@@ -1,9 +1,11 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
+const screenHeight = Dimensions.get('window').height;
 
 export const globalStyles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    height: screenHeight - 60,
   },
   centered: {
     justifyContent: 'center',
@@ -14,7 +16,6 @@ export const AppNavigatorStyles = StyleSheet.create({
   tabBarStyle: {
     height: 60,
     paddingBottom: 10,
-    paddingVertical: 20,
     backgroundColor: '#ffffff',
     borderTopWidth: 1,
     borderTopColor: '#ddd',

@@ -11,7 +11,7 @@ const typography = {
   fontSizeHuge: width < 400 ? 30 : 32,
   fontWeightLight: '300',
   fontWeightRegular: '400',
-  fontWeightBold: '700',
+  fontWeightBold: '800',
   width,
   height,
 };
