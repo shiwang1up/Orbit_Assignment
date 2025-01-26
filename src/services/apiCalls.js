@@ -1,5 +1,3 @@
-import {loremIpsum} from 'lorem-ipsum';
-
 const loremWords = [
   'lorem',
   'ipsum',
@@ -100,5 +98,4 @@ const fetchImageOfSize = async (width, height) => {
   const caption = generateParagraph();
   return {uri, caption};
 };
-
 export {fetchImage, fetchImageOfSize};

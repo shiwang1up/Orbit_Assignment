@@ -13,6 +13,41 @@ import {ICON_COLORS, ICON_SIZES, ICON_NAMES} from '../constants/constants';
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
+const TabBarIcon = ({route, focused}) => {
+  let iconName;
+  let IconComponent;
+  let iconSize;
+
+  if (route.name === 'Home') {
+    iconName = `${ICON_NAMES.HOME}`;
+    IconComponent = Ionicons;
+    iconSize = ICON_SIZES.SMALL;
+  } else if (route.name === 'Discover') {
+    iconName = `${ICON_NAMES.DISCOVER}`;
+    IconComponent = AntDesign;
+    iconSize = ICON_SIZES.MEDIUM;
+  } else if (route.name === 'Create') {
+    iconName = `${ICON_NAMES.CREATE}`;
+    IconComponent = AntDesign;
+    iconSize = ICON_SIZES.SMALL;
+  } else if (route.name === 'Community') {
+    iconName = `${ICON_NAMES.COMMUNITY}`;
+    IconComponent = Ionicons;
+    iconSize = ICON_SIZES.MEDIUM;
+  } else if (route.name === 'Me') {
+    iconName = `${ICON_NAMES.ME}`;
+    IconComponent = MaterialCommunityIcons;
+    iconSize = ICON_SIZES.LARGE;
+  }
+  return (
+    <IconComponent
+      name={iconName}
+      size={iconSize}
+      color={focused ? `${ICON_COLORS.PRIMARY}` : `${ICON_COLORS.SECONDARY}`}
+    />
+  );
+};
+
 const HomeStack = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
@@ -20,6 +55,14 @@ const HomeStack = () => {
       <Stack.Screen name="Search" component={Home} />
     </Stack.Navigator>
   );
+};
+const screenOptions = {
+  headerShown: false,
+  tabBarShowLabel: true,
+  tabBarStyle: AppNavigatorStyles.tabBarStyle,
+  tabBarLabelStyle: AppNavigatorStyles.tabBarLabelStyle,
+  tabBarActiveTintColor: '#000',
+  tabBarInactiveTintColor: '#C0C0C0',
 };
 
 export default function AppNavigator() {
@@ -29,43 +72,9 @@ export default function AppNavigator() {
         headerShown: false,
         tabBarShowLabel: true,
         tabBarStyle: AppNavigatorStyles.tabBarStyle,
-        tabBarIcon: ({focused}) => {
-          let iconName;
-          let IconComponent;
-          let iconSize;
-
-          if (route.name === 'Home') {
-            iconName = `${ICON_NAMES.HOME}`;
-            IconComponent = Ionicons;
-            iconSize = ICON_SIZES.SMALL;
-          } else if (route.name === 'Discover') {
-            iconName = `${ICON_NAMES.DISCOVER}`;
-            IconComponent = AntDesign;
-            iconSize = ICON_SIZES.MEDIUM;
-          } else if (route.name === 'Create') {
-            iconName = `${ICON_NAMES.CREATE}`;
-            IconComponent = AntDesign;
-            iconSize = ICON_SIZES.SMALL;
-          } else if (route.name === 'Community') {
-            iconName = `${ICON_NAMES.COMMUNITY}`;
-            IconComponent = Ionicons;
-            iconSize = ICON_SIZES.MEDIUM;
-          } else if (route.name === 'Me') {
-            iconName = `${ICON_NAMES.ME}`;
-            IconComponent = MaterialCommunityIcons;
-            iconSize = ICON_SIZES.LARGE;
-          }
-
-          return (
-            <IconComponent
-              name={iconName}
-              size={iconSize}
-              color={
-                focused ? `${ICON_COLORS.PRIMARY}` : `${ICON_COLORS.SECONDARY}`
-              }
-            />
-          );
-        },
+        tabBarIcon: ({focused}) => (
+          <TabBarIcon route={route} focused={focused} />
+        ),
         tabBarLabelStyle: AppNavigatorStyles.tabBarLabelStyle,
         tabBarActiveTintColor: '#000',
         tabBarInactiveTintColor: '#C0C0C0',

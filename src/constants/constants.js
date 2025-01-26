@@ -80,7 +80,7 @@ export const topCommunities = [
   {
     id: 1,
     image:
-      'https://images.unsplash.com/photo-1431274172761-fca41d930114?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1500153556700-4c8db53996c3?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     title: 'Places of',
     place: 'FRANCE',
     totalPosts: 75,
@@ -96,7 +96,7 @@ export const topCommunities = [
   {
     id: 3,
     image:
-      'https://images.unsplash.com/photo-1518730518541-d0843268c287?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1595196862630-d5825e9ee2da?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHZlbmljZXxlbnwwfDB8MHx8fDA%3D',
     title: 'Beauty of',
     place: 'VENICE',
     totalPosts: 105,

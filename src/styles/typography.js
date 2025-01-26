@@ -5,6 +5,7 @@ const {width, height} = Dimensions.get('window');
 const typography = {
   fontSizeExtraSmall: width < 400 ? 10 : 12,
   fontSizeSmall: width < 400 ? 12 : 14,
+  fontSizeMidMedium: width < 400 ? 14 : 16,
   fontSizeMedium: width < 400 ? 16 : 18,
   fontSizeLarge: width < 400 ? 20 : 22,
   fontSizeExtraLarge: width < 400 ? 24 : 26,

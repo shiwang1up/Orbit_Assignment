@@ -14,11 +14,16 @@ import {trendingHashtags} from '../constants/constants';
 import {topSearches} from '../constants/constants';
 import {topCommunities} from '../constants/constants';
 import {topNomads} from '../constants/constants';
+import PagerView from 'react-native-pager-view';
 
 const height = typography.height;
 const width = typography.width;
 const isPortrait = height > width;
 export default function Search() {
+  const handlePageSelected = event => {
+    const currentPage = event.nativeEvent.position;
+    console.log(`Page ${currentPage} selected`);
+  };
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -30,12 +35,13 @@ export default function Search() {
         />
 
         <View style={styles.topSearchContainer}>
-          <FlatList
-            horizontal
-            data={topSearches}
-            keyExtractor={item => item.id.toString()}
-            renderItem={({item}) => (
-              <TouchableOpacity style={styles.cardTop}>
+          <PagerView
+            style={styles.topSearchPagerView}
+            initialPage={0}
+            orientation={'horizontal'}
+            onPageSelected={handlePageSelected}>
+            {topSearches.map((item, index) => (
+              <View key={index} style={styles.cardTop}>
                 <Image
                   source={{uri: item.image}}
                   style={styles.topSearchImage}
@@ -46,10 +52,9 @@ export default function Search() {
                   </Text>
                   <Text style={styles.topSearchTitle}>{item.title}</Text>
                 </View>
-              </TouchableOpacity>
-            )}
-            showsHorizontalScrollIndicator={false}
-          />
+              </View>
+            ))}
+          </PagerView>
         </View>
 
         <View style={styles.sectionContainer}>
@@ -163,8 +168,13 @@ const styles = StyleSheet.create({
     bottom: 16,
     left: 16,
     color: '#fff',
-    fontSize: typography.fontSizeMedium,
+    fontSize: typography.fontSizeMidMedium,
     fontWeight: typography.fontWeightBold,
+  },
+  topSearchPagerView: {
+    flex: 1,
+    width: '100%',
+    height: 250,
   },
   topSearchTitle: {
     position: 'absolute',
@@ -193,7 +203,7 @@ const styles = StyleSheet.create({
   },
   topCommunityTitle: {
     position: 'absolute',
-    bottom: 40,
+    bottom: 36,
     left: 5,
     color: '#fff',
     fontSize: typography.fontSizeLarge,
@@ -201,7 +211,8 @@ const styles = StyleSheet.create({
   },
   topCommunityPlace: {
     position: 'absolute',
-    bottom: 10,
+    bottom: 6,
+    opacity: 0.9,
     left: 5,
     color: '#fff',
     fontSize: typography.fontSizeExtraLarge,

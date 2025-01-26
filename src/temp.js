@@ -1,138 +1,71 @@
-import React, {useEffect, useState} from 'react';
-import {
-  Text,
-  TouchableOpacity,
-  ImageBackground,
-  ActivityIndicator,
-  FlatList,
-} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import typography from '../styles/typography';
-import {fetchImageOfSize} from '../services/apiCalls';
+import React, {useState, useEffect} from 'react';
+import {View, Image, StyleSheet} from 'react-native';
+import PagerView from 'react-native-pager-view';
+import typography from './styles/typography';
 
-export default function Home() {
-  const height = Math.round(typography.height);
-  const width = Math.round(typography.width);
-  const [loading, setLoading] = useState(true);
-  const [imageUris, setImageUris] = useState([]);
-  const [refreshing, setRefreshing] = useState(false);
+const height = Math.round(typography.height);
+const width = Math.round(typography.width);
+
+const TestPagerView = () => {
+  const [images, setImages] = useState([]);
+
+  const fetchImages = async () => {
+    try {
+      const response = await fetch(`https://picsum.photos/${width}/${height}`);
+      const imageUrl = response.url;
+      setImages(prevImages => [...prevImages, {uri: imageUrl}]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    fetchImageOfSize(width, height).then(uri => {
-      setImageUris([uri]);
-      setLoading(false);
-    });
-  }, [width, height]);
+    fetchImages();
+  }, []);
 
-  const handleEndReached = () => {
-    if (!refreshing) {
-      setRefreshing(true);
-      fetchImageOfSize(width, height).then(uri => {
-        setImageUris([...imageUris, uri]);
-        setRefreshing(false);
-      });
+  const handlePageSelected = event => {
+    if (event.nativeEvent.position === images.length - 1) {
+      fetchImages();
     }
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      {loading ? (
-        <ActivityIndicator
-          size="large"
-          color="#0000ff"
-          style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}
-        />
-      ) : (
-        <FlatList
-          data={imageUris}
-          renderItem={({item}) => (
-            <ImageBackground
-              source={{uri: item}}
-              style={{flex: 1, width: '100%', height: '100%'}}>
-              <TouchableOpacity>
-                <Text>Homeiesssssssssssssssssssssssss</Text>
-              </TouchableOpacity>
-            </ImageBackground>
-          )}
-          keyExtractor={(item, index) => index.toString()}
-          onEndReached={handleEndReached}
-          onEndReachedThreshold={0.5}
-          refreshing={refreshing}
-          onRefresh={handleEndReached}
-        />
-      )}
-    </SafeAreaView>
+    <View style={styles.container}>
+      <PagerView
+        style={styles.pagerView}
+        initialPage={0}
+        orientation={'horizontal'}
+        onPageSelected={handlePageSelected}>
+        {images.map((image, index) => (
+          <View key={index} style={styles.page}>
+            <Image source={{uri: image.uri}} style={styles.image} />
+          </View>
+        ))}
+      </PagerView>
+    </View>
   );
-}
+};
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  pagerView: {
+    flex: 1,
+    width: '100%',
+  },
+  page: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
+});
 
-/**
- * 
- * import React, {useEffect, useState} from 'react';
-import {
-  Text,
-  TouchableOpacity,
-  ImageBackground,
-  ActivityIndicator,
-  FlatList,
-} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import typography from '../styles/typography';
-import {fetchImageOfSize} from '../services/apiCalls';
-
-export default function Home() {
-  const height = Math.round(typography.height);
-  const width = Math.round(typography.width);
-  const [loading, setLoading] = useState(true);
-  const [imageUris, setImageUris] = useState([]);
-  const [refreshing, setRefreshing] = useState(false);
-
-  useEffect(() => {
-    fetchImageOfSize(width, height).then(uri => {
-      setImageUris(uri);
-      setLoading(false);
-    });
-  }, [width, height]);
-
-  const handleEndReached = () => {
-    if (!refreshing) {
-      setRefreshing(true);
-      fetchImageOfSize(width, height).then(uri => {
-        setImageUris([...imageUris, uri]);
-        setRefreshing(false);
-      });
-    }
-  };
-  return (
-    <SafeAreaView style={{flex: 1}}>
-      {loading ? (
-        <ActivityIndicator
-          size="large"
-          color="#0000ff"
-          style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}
-        />
-      ) : (
-        <FlatList
-          data={imageUris}
-          renderItem={({item}) => (
-            <ImageBackground
-              source={{uri: item}}
-              style={{flex: 1, width: '100%', height: '100%'}}>
-              <TouchableOpacity>
-                <Text>Homeiesssssssssssssssssssssssss</Text>
-              </TouchableOpacity>
-            </ImageBackground>
-          )}
-          keyExtractor={(item, index) => index.toString()}
-          onEndReached={handleEndReached}
-          onEndReachedThreshold={0.5}
-          refreshing={refreshing}
-          onRefresh={handleEndReached}
-        />
-      )}
-    </SafeAreaView>
-  );
-}
-
- * 
- */
+export default TestPagerView;
